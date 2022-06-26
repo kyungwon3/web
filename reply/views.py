@@ -35,12 +35,16 @@ def read(request, rid):
 
     return render(request, 'reply/read.html', {'reply':reply})
 
-
+@login_required(login_url='/user/login')
 def delete(request, rid):
+    # post = Post.objects.get(id)
     reply = Reply.objects.get(id=rid)
+    if request.user != reply.writer:
+        return redirect('/board/list')
     reply.delete()
+    return redirect('/board/list')
+# 그 페이지로 돌아가는 방법을 모르겟음..
 
-    return redirect('/reply/list')
 
 def update(request, rid):
     reply = Reply.objects.get(id=rid)

@@ -1,13 +1,22 @@
-<!DOCTYPE html>
+
+{% load static %}
+
+<!--<!DOCTYPE html>-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+
 {% if reply %}
-    {{ reply.id }}
+    [댓글 변경] :
     {{ reply.contents }}
+<a href="/reply/update/{{ reply.id }}" class="btn btn-primary">수정</a>
+<a href="/reply/delete/{{ reply.id }}" class="btn btn-primary">삭제</a>
+<a href="/board/list" class="btn btn-primary">제출</a>
+<!--<a href="/board/read/{{ post.id }}" class="btn btn-primary">제출</a>-->
 {% endif %}
+
 </body>
 </html>

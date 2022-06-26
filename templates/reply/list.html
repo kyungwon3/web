@@ -30,6 +30,10 @@
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading"> {{ reply.id }}</div>
                                 <div class="portfolio-caption-subheading text-muted"> {{ reply.contents }}</div>
+                                {% if request.user == reply.writer %}
+                                <a href="/reply/update/{{ reply.id }}" class="btn btn-primary">수정</a>
+                                <a href="/reply/delete/{{ reply.id }}" class="btn btn-primary">삭제</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

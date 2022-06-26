@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+        <!-- Portfolio Grid-->
+        <section class="page-section bg-light" id="portfolio">
+            <div class="container">
+                <form method="post">
+                    {% csrf_token %}
+                    <input name="title" value="{{ post.title }}" type="text">
+                    <textarea name="contents" id="summernote"> {{ post.contents }} </textarea>
+                    <button>댓글 작성 </button>
+                </form>
+                <script>
+                  $('#summernote').summernote({
+                    placeholder: '댓글 내용을 입력해주세요.',
+                    tabsize: 2,
+                    height: 120,
+                    toolbar: [
+                      ['style', ['style']],
+                      ['font', ['bold', 'underline', 'clear']],
+                      ['color', ['color']],
+                      ['para', ['ul', 'ol', 'paragraph']],
+                      ['table', ['table']],
+                      ['insert', ['link', 'picture', 'video']],
+                      ['view', ['fullscreen', 'codeview', 'help']]
+                    ]
+                });
+                </script>
+                </div>
+            </div>
+        </section>
+{% endblock %}

@@ -37,13 +37,13 @@
                 <div class="col-md-2">
                     <button class="btn btn-primary text-uppercase"
                             id="submitButton" type="submit">
-                        게시글 작성
+                        댓글 작성
                     </button>
                 </div>
             </div>
         </form>
         <div class="container">
-            <div class="text-center">
+            <div class="text-left">
                 <h3 class="section-subheading text-muted"></h3>
             </div>
             <ul class="timeline">
@@ -51,7 +51,32 @@
                 <li class="timeline-inverted">
 
                     <div class="timeline-panel">
-                        <div class="timeline-body"><p class="text-muted">{{reply.contents}}</p></div>
+                        <div class="timeline-body"><p class="text-muted">{{reply.contents}}</p>
+                            {% if request.user == reply.writer %}
+                             <form action="/reply/update/{{ reply.id }}" method="post">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <button class="btn btn-primary text-uppercase"
+                                                id="submitButton" type="submit">
+                                        수정
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <form action="/reply/delete/{{ reply.id }}" method="post">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <button class="btn btn-primary text-uppercase"
+                                                id="submitButton" type="submit">
+                                        삭제
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            {% endif %}
+                        </div>
                     </div>
                 </li>
                 {% endfor %}
