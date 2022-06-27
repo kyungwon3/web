@@ -46,3 +46,5 @@ urlpatterns = [
     path('like/<int:bid>', board.views.like),
 
 ]
+#+ static(settings.MEDIA_URL)
+#media 파일 만들어지면 넣기 !!

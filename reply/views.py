@@ -37,7 +37,7 @@ def read(request, rid):
 
 @login_required(login_url='/user/login')
 def delete(request, rid):
-    # post = Post.objects.get(id)
+    # post = Post.objects.get(id=bid)
     reply = Reply.objects.get(id=rid)
     if request.user != reply.writer:
         return redirect('/board/list')
