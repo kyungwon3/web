@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 
 from board.models import Post
@@ -57,3 +58,15 @@ def update(request, rid):
             reply = replyForm.save(commit=False)
             reply.save()
         return redirect('/reply/read/' + str(reply.id))
+
+@login_required(login_url='/user/login')
+def like(request, rid):
+    reply = Reply.objects.get(id=rid)
+
+    if reply.like.filter(id=request.user.id).exists():
+        reply.like.remove(request.user)
+        return JsonResponse({'message': 'deleted', 'like_cnt' : reply.like.count()})
+    else:
+        reply.like.add(request.user)
+       #비동기 통신
+        return JsonResponse({'message':'added', 'like_cnt' : reply.like.count()})
